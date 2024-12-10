@@ -1,0 +1,10 @@
+[workspace]
+
+members = [
+    "echo",
+    # having `tests` on workspace level is preferrable, but does not allow to compile binaries before
+    # integration tests.
+    "tests"
+]
+
+resolver = "2"

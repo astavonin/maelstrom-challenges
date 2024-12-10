@@ -1,0 +1,13 @@
+[package]
+name = "tests"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[lib]
+name = "utils"
+path = "utils/lib.rs"
+
+[[test]]
+name = "test_echo"
+path = "echo/test_echo.rs"

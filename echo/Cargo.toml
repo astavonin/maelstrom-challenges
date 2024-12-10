@@ -1,0 +1,18 @@
+[package]
+name = "echo"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+bench = false
+path = "src/main.rs"
+name = "echo"
+
+# only if we have this part, Cargo will compile `echo` before `test_echo`. BUT, `CARGO_MANIFEST_DIR` will point to
+# `maelstrom-challenges/echo` folder instead of `maelstrom-challenges/tests` folder in that case, which is also wrong.
+#[[test]]
+#name = "test_echo"
+#path = "../tests/echo/test_echo.rs"
+[dependencies]
+async-trait = "0.1.83"
+maelstrom-node = "0.1.6"
