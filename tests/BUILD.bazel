@@ -1,0 +1,25 @@
+load("@rules_rust//rust:defs.bzl", "rust_library", "rust_test")
+
+package(default_visibility = ["//visibility:public"])
+
+rust_library(
+    name = "utils",
+    srcs = [
+        "utils/lib.rs",
+        "utils/paths.rs",
+        "utils/runner.rs",
+    ],
+)
+
+rust_test(
+    name = "test_echo",
+    size = "small",
+    srcs = ["echo/test_echo.rs"],
+    data = [
+        ":maelstrom/lib/maelstrom.jar",
+    ],
+    deps = [
+        ":utils",
+        "//echo",
+    ],
+)

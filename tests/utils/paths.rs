@@ -16,8 +16,13 @@ pub fn cargo_bin_dir() -> PathBuf {
         .unwrap_or_else(|| panic!("CARGO_BIN_PATH wasn't set. Cannot continue running test"))
 }
 
+pub fn bazel_runfiles_dir() -> PathBuf {
+    PathBuf::from(env::var_os("RUNFILES_DIR").unwrap()).join("_main")
+}
+
 pub fn maelstrom_dir() -> PathBuf {
-    PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+    bazel_runfiles_dir()
+        .join("tests")
         .join("maelstrom")
         .join("lib")
 }
