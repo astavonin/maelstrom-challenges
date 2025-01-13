@@ -10,3 +10,8 @@ see comments in [echo/Cargo.toml](echo/Cargo.toml) and [Cargo.toml](Cargo.toml))
 cargo build
 cargo test
 ```
+
+To generate `compile_commands.json` use
+```bash
+bazel run @hedron_compile_commands//:refresh_all
+```

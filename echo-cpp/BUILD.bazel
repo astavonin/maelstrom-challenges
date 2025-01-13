@@ -1,0 +1,21 @@
+cc_binary(
+    name = "echo-cpp",
+    srcs = [
+        "handler.hpp",
+        "main.cpp",
+        "message.cpp",
+        "message.hpp",
+        "node.cpp",
+        "node.hpp",
+    ],
+    copts = [
+        "-std=c++23",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "@boost//:algorithm",
+        "@boost//:asio",
+        "@nlohmann_json//:json",
+        "@spdlog",
+    ],
+)

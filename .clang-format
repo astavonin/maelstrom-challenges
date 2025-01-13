@@ -6,12 +6,13 @@ AlignConsecutiveMacros: Consecutive
 AlignOperands: Align
 AlignTrailingComments: Always
 AllowShortBlocksOnASingleLine: Always
-AllowShortFunctionsOnASingleLine: All
+AllowShortFunctionsOnASingleLine: InlineOnly
 AllowShortIfStatementsOnASingleLine: AllIfsAndElse
 AllowShortLambdasOnASingleLine: All
 BreakBeforeBraces: Linux
 BreakBeforeBinaryOperators: All
 BreakInheritanceList: BeforeComma
+BreakTemplateDeclarations: Yes
 ColumnLimit: 88
 FixNamespaceComments: true
 IncludeBlocks: Regroup
@@ -21,6 +22,7 @@ InsertBraces: true
 InsertNewlineAtEOF: true
 NamespaceIndentation: None
 PackConstructorInitializers: Never
+SeparateDefinitionBlocks: Always
 SortUsingDeclarations: LexicographicNumeric
 SpaceBeforeParens: Custom
 SpaceBeforeParensOptions:

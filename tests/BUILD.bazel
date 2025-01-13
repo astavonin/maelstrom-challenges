@@ -23,3 +23,16 @@ rust_test(
         "//echo",
     ],
 )
+
+rust_test(
+    name = "test_echo-cpp",
+    size = "small",
+    srcs = ["echo-cpp/test_echo.rs"],
+    data = [
+        ":maelstrom/lib/maelstrom.jar",
+    ],
+    deps = [
+        ":utils",
+        "//echo-cpp",
+    ],
+)
