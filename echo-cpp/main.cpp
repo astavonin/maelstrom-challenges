@@ -1,6 +1,6 @@
-#include "echo-cpp/handler.hpp"
-#include "echo-cpp/message.hpp"
-#include "echo-cpp/node.hpp"
+#include "maelstrom-node/handler.hpp"
+#include "maelstrom-node/message.hpp"
+#include "maelstrom-node/node.hpp"
 
 #include <boost/asio.hpp>
 #include <boost/bind/bind.hpp>
