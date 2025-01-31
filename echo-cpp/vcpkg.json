@@ -1,0 +1,10 @@
+{
+  "name": "echo-cpp",
+  "version-string": "1.0.0",
+  "dependencies": [
+    "boost-algorithm",
+    "nlohmann-json",
+    "spdlog",
+    "boost-asio"
+  ]
+}
