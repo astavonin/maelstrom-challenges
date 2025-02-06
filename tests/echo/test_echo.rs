@@ -8,7 +8,7 @@ mod echo_tests {
         let maelstrom_jar = paths::maelstrom_dir().join("maelstrom.jar");
         let echo_path = paths::bazel_runfiles_dir().join("echo").join("echo");
 
-        let o = runner::maelstrom_cmd(maelstrom_jar, echo_path)
+        let o = runner::maelstrom_cmd(maelstrom_jar, echo_path, "echo")
             .output()
             .unwrap();
 

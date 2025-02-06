@@ -10,7 +10,7 @@ mod echo_tests {
             .join("echo-cpp")
             .join("echo-cpp");
 
-        let o = runner::maelstrom_cmd(maelstrom_jar, echo_path)
+        let o = runner::maelstrom_cmd(maelstrom_jar, echo_path, "echo")
             .output()
             .unwrap();
 

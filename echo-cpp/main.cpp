@@ -2,9 +2,6 @@
 #include "maelstrom-node/message.hpp"
 #include "maelstrom-node/node.hpp"
 
-#include <boost/asio.hpp>
-#include <boost/bind/bind.hpp>
-#include <memory>
 #include <spdlog/cfg/env.h>
 #include <spdlog/sinks/basic_file_sink.h>
 #include <spdlog/spdlog.h>
@@ -27,13 +24,11 @@ public:
 
         sender->send( replay );
     }
-
-private:
 };
 
 int main()
 {
-    auto file_logger = spdlog::basic_logger_mt( "file_logger", "maelstrom_log.txt" );
+    auto file_logger = spdlog::basic_logger_mt( "file_logger", "echo_log.txt" );
     spdlog::set_default_logger( file_logger );
     spdlog::flush_on( spdlog::level::trace );
 
