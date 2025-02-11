@@ -8,6 +8,7 @@
 #include <string>
 
 using maelstrom_node::handler;
+namespace mf = maelstrom_node::msg_field;
 
 class echo_handler : public handler
 {
@@ -17,10 +18,9 @@ public:
     void process( maelstrom_node::sender     *sender,
                   maelstrom_node::message_ptr msg ) override
     {
-        auto replay = msg->make_replay();
-        replay->payload().type( "echo_ok" );
-        replay->payload().set_value( "echo",
-                                     msg->payload().get_value<std::string>( "echo" ) );
+        auto replay = msg->make_reply();
+        replay->set_value<mf::data_type>( "echo_ok" );
+        replay->set_value_raw( "echo", msg->get_value_raw<std::string>( "echo" ) );
 
         sender->send( replay );
     }

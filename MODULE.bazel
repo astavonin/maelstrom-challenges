@@ -56,11 +56,12 @@ use_repo(
 
 bazel_dep(name = "spdlog", version = "1.15.0.bcr.3")
 bazel_dep(name = "nlohmann_json", version = "3.11.3.bcr.1")
-bazel_dep(name = "maelstrom_node", version = "1.0.0")
+bazel_dep(name = "maelstrom_node", version = "1.0.2")
 git_override(
     module_name = "maelstrom_node",
-    commit = "004b1d793427838db32d5e175f1f474bec260766",
+    # commit = "004b1d793427838db32d5e175f1f474bec260766",
     remote = "https://github.com/astavonin/maelstrom-node.git",
+    tag = "v1.0.2",
 )
 
 # Hedron's Compile Commands Extractor for Bazel
