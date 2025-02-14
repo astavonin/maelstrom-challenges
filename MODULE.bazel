@@ -38,6 +38,7 @@ use_repo(crate, "crate_index")
 bazel_dep(name = "buildifier_prebuilt", version = "7.3.1")
 
 # C++ toolchain
+bazel_dep(name = "rules_cc", version = "0.1.1")
 
 # 3rd-party C++ libraries
 bazel_dep(name = "rules_boost", repo_name = "com_github_nelhage_rules_boost")
@@ -59,9 +60,8 @@ bazel_dep(name = "nlohmann_json", version = "3.11.3.bcr.1")
 bazel_dep(name = "maelstrom_node", version = "1.0.2")
 git_override(
     module_name = "maelstrom_node",
-    # commit = "004b1d793427838db32d5e175f1f474bec260766",
+    commit = "16b495eddecff226486994645bdc334980fb61bc",
     remote = "https://github.com/astavonin/maelstrom-node.git",
-    tag = "v1.0.2",
 )
 
 # Hedron's Compile Commands Extractor for Bazel
