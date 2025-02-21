@@ -1,15 +1,16 @@
-cc_binary(
-    name = "broadcast",
+cc_library(
+    name = "utils",
     srcs = [
-        "main.cpp",
+        "path.cpp",
+    ],
+    hdrs = [
+        "hash.hpp",
+        "path.hpp",
     ],
     copts = [
         "-std=c++23",
     ],
     visibility = ["//visibility:public"],
     deps = [
-        "//utils",
-        "@maelstrom_node",
-        "@spdlog",
     ],
 )

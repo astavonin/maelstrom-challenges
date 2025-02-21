@@ -1,8 +1,9 @@
 #include "maelstrom-node/handler.hpp"
 #include "maelstrom-node/message.hpp"
 #include "maelstrom-node/node.hpp"
+#include "utils/hash.hpp"
+#include "utils/path.hpp"
 
-#include <filesystem>
 #include <fmt/ranges.h>
 #include <memory>
 #include <spdlog/cfg/env.h>
@@ -11,50 +12,10 @@
 #include <string_view>
 #include <unordered_set>
 
-#ifdef __APPLE__
-#include <mach-o/dyld.h>
-#endif
-
 namespace mf = maelstrom_node::msg_field;
 
-std::filesystem::path get_executable_path()
-{
-#ifdef __APPLE__
-    uint32_t size = 0;
-    // First call to determine the required buffer size
-    _NSGetExecutablePath( nullptr, &size );
-    std::vector<char> buffer( size );
-    if( _NSGetExecutablePath( buffer.data(), &size ) != 0 ) {
-        throw std::runtime_error(
-            "Unable to get executable path using _NSGetExecutablePath" );
-    }
-    // _NSGetExecutablePath might return a relative path,
-    // so we canonicalize it to get the absolute path.
-    return std::filesystem::canonical( buffer.data() ).parent_path();
-#elif defined( __linux__ )
-    // On Linux, /proc/self/exe is a symlink to the executable.
-    return std::filesystem::read_symlink( "/proc/self/exe" ).parent_path();
-#else
-    throw std::runtime_error( "get_executable_path not implemented on this platform" );
-#endif
-}
-
 using maelstrom_node::handler;
-
-constexpr uint64_t hash( std::string_view str )
-{
-    uint64_t hash = 0;
-#pragma unroll
-    for( char chr : str ) {
-        hash = ( hash * 131 ) + chr;
-    }
-    return hash;
-}
-
-constexpr uint64_t operator"" _hash( const char *str, size_t len )
-{
-    return hash( std::string_view( str, len ) );
-}
+using utils::operator"" _hash;
 
 class broadcast_handler : public handler
 {
@@ -64,7 +25,7 @@ public:
     void process( maelstrom_node::sender     *sender,
                   maelstrom_node::message_ptr msg ) override
     {
-        switch( hash( msg->get_value<mf::data_type>() ) ) {
+        switch( utils::hash( msg->get_value<mf::data_type>() ) ) {
         case "topology"_hash: {
             auto topo = msg->get_value<mf::topology>();
             spdlog::info( "\"topology\" message: {}", topo );
@@ -118,7 +79,7 @@ private:
 int main()
 {
     auto file_logger = spdlog::basic_logger_mt(
-        "file_logger", get_executable_path() / "broadcast_log.txt" );
+        "file_logger", utils::get_executable_path() / "broadcast_log.txt" );
     spdlog::set_default_logger( file_logger );
     spdlog::flush_on( spdlog::level::trace );
     spdlog::set_pattern( "[%L][%T.%f][%P/%t] %v" );
